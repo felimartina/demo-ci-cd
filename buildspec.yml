@@ -4,34 +4,34 @@ env:
   variables:
      NODE_VERSION: "8.1.4"
 phases:
-  install:
-    commands:
-      - echo Installing Node ...
-      - wget -qO- https://nodejs.org/dist/v${NODE_VERSION}/node-v${NODE_VERSION}-linux-x64.tar.xz | tar xJ --directory /usr/local
-      - ln -s /usr/local/node-v${NODE_VERSION}-linux-x64 /usr/local/node
-      - export PATH=/usr/local/node/bin/:${PATH}
+  # install:
+  #   commands:
+  #     - echo Installing Node ...
+  #     - wget -qO- https://nodejs.org/dist/v${NODE_VERSION}/node-v${NODE_VERSION}-linux-x64.tar.xz | tar xJ --directory /usr/local
+  #     - ln -s /usr/local/node-v${NODE_VERSION}-linux-x64 /usr/local/node
+  #     - export PATH=/usr/local/node/bin/:${PATH}
   pre_build:
     commands:
       - cd $CODEBUILD_SRC_DIR # move to code buil root directory, in case that previous script cd into a different directory
       - echo Installing dependencies
-      - cd frontend
-      - npm install
+      # - cd frontend
+      # - npm install
       - cd $CODEBUILD_SRC_DIR/api
       - npm install
-  build:
-    commands:
-      - cd $CODEBUILD_SRC_DIR # move to code buil root directory, in case that previous script cd into a different directory
-      - echo Building Frontend
-      - cd frontend
-      - ng build --prod
+  # build:
+  #   commands:
+  #     - cd $CODEBUILD_SRC_DIR # move to code buil root directory, in case that previous script cd into a different directory
+  #     - echo Building Frontend
+  #     - cd frontend
+  #     - ng build --prod
   post_build:
     commands:
       - cd $CODEBUILD_SRC_DIR # move to code buil root directory, in case that previous script cd into a different directory
       - echo Updating site in s3
-      - aws s3 sync ./frontend/dist s3://$FRONTEND_BUCKET --acl public-read --delete --region $AWS_DEFAULT_REGION
+      - aws s3 sync ./frontend s3://$FRONTEND_BUCKET --acl public-read --delete --region $AWS_DEFAULT_REGION
 artifacts:
   files:
-    - frontend/dist/**/*
+    # - frontend/**/*
     - api/**/*
   #discard-paths: yes
   #base-directory: location
