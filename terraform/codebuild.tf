@@ -101,7 +101,7 @@ resource "aws_codebuild_project" "demo-ci-cd" {
 
   environment {
     compute_type    = "BUILD_GENERAL1_SMALL"
-    image           = "aws/codebuild/eb-nodejs-6.10.0-amazonlinux-64:4.0.0"
+    image           = "aws/codebuild/docker:1.12.1"
     type            = "LINUX_CONTAINER"
     privileged_mode = "true"
 

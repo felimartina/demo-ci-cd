@@ -2,12 +2,14 @@ version: 0.2
 
 env:
   variables:
-     NODE_VERSION: "6.10.0"
+     NODE_VERSION: "8.1.4"
 phases:
   install:
     commands:
-      - echo Installing ngcli ...
-      - npm install -g @angular/cli
+      - echo Installing Node ...
+      - wget -qO- https://nodejs.org/dist/v${NODE_VERSION}/node-v${NODE_VERSION}-linux-x64.tar.xz | tar xJ --directory /usr/local
+      - ln -s /usr/local/node-v${NODE_VERSION}-linux-x64 /usr/local/node
+      - export PATH=/usr/local/node/bin/:${PATH}
   pre_build:
     commands:
       - cd $CODEBUILD_SRC_DIR # move to code buil root directory, in case that previous script cd into a different directory
