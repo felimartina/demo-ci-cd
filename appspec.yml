@@ -14,19 +14,19 @@ permissions:
         - directory
 hooks:
   # BeforeInstall:
-  #   - location: scripts/aws-code-deploy/before_install.sh
+  #   - location: scripts/before_install.sh
   #     timeout: 300
   #     runas: root
   # AfterInstall:
-  #   - location: scripts/aws-code-deploy/after_install.sh
+  #   - location: scripts/after_install.sh
   #     timeout: 300
   #     runas: root
   ApplicationStart:
-    - location: scripts/aws-code-deploy/app_start.sh
+    - location: scripts/app_start.sh
       timeout: 300
       runas: root
   ApplicationStop:
-    - location: scripts/aws-code-deploy/app_stop.sh
+    - location: scripts/app_stop.sh
       timeout: 300
       runas: root
 
