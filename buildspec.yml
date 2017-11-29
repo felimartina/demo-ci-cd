@@ -15,7 +15,7 @@ phases:
       - cd $CODEBUILD_SRC_DIR # move to code buil root directory, in case that previous script cd into a different directory
       - echo Installing dependencies
       - cd frontend
-      - npm install
+      - npm install --unsafe-perm # Added --unsafe-perm flag based on this issue => https://github.com/sass/node-sass/issues/1847
       - cd $CODEBUILD_SRC_DIR/api
       - npm install
   build:
